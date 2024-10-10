@@ -1,22 +1,28 @@
+require('dotenv').config();
 const express = require('express');
-const dotenv = require('dotenv').config();
-const cors = require('cors');
-// const connectDB = require('./config/database');
-// const authRoutes = require('./routes/authRoutes');
+const connectDB = require('./config/database');
+const authRoutes = require('./routes/authRoutes');
+const cors = require("cors");
 
 const app = express();
 
-app.use('/', require('./routes/authRoutes'))
+connectDB();
 
-const PORT = 8000;
-app.listen(PORT, () => console.log(`server is running on port ${PORT}`))
+// CORS configuration
+const corsOptions = {
+   origin: "http://localhost:3000", 
+   credentials: true, 
+   optionsSuccessStatus: 200, 
+};
 
-// connectDB();
+// Enable CORS with the specified options
+app.use(cors(corsOptions));
 
-// app.use(express.json());
 
-// app.use('/api/auth', authRoutes);
+app.use(express.json());
 
-// const PORT = process.env.PORT || 3001;
+app.use('/api/auth', authRoutes);
 
-// app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+const PORT = process.env.PORT || 8000;
+
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

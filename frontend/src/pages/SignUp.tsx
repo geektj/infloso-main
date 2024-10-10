@@ -3,10 +3,10 @@ import { Input } from "../components/input";
 import { Button } from "../components/button";
 import { useNavigate } from "react-router-dom";
 import DummyImg from "../assets/dummyImg.png";
-
-// interface FormProps {
-//     onSubmit: (e: React.FormEvent<HTMLFormElement>) => void
-// }
+import axiosInstance from "../services/axiosInstance";
+import { toast } from "react-toastify";
+import { Errors } from "../utills/types";
+import { API_ROUTES } from "../constants/apiRoutes";
 
 const SignUp = () => {
   const [name, setName] = useState("");
@@ -14,12 +14,10 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [termsConditions, setTermsConditions] = useState(false);
-  const [errors, setErrors] = useState("");
-  //   const [passwordError, setPasswordError] = useState("");
-  //   const [confirmPasswordError, setConfirmPasswordError] = useState("")
+  const [errors, setErrors] = useState<Errors>({});
   const navigate = useNavigate();
 
-  const validateEmail = useCallback((email) => {
+  const validateEmail = useCallback((email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!email) {
       return ["Email is required"];
@@ -30,7 +28,7 @@ const SignUp = () => {
     return [];
   }, []);
 
-  const validatePassword = useCallback((password) => {
+  const validatePassword = useCallback((password: string) => {
     const errors = [];
     if (!password) {
       return ["Password is required"];
@@ -51,7 +49,7 @@ const SignUp = () => {
   }, []);
 
   const validateForm = useCallback(() => {
-    const newErrors = {};
+    const newErrors: Errors = {};
     const emailErrors = validateEmail(email);
     const passwordErrors = validatePassword(password);
 
@@ -75,11 +73,30 @@ const SignUp = () => {
     validateForm();
   }, [email, password, confirmPassword, validateForm]);
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     if (validateForm()) {
+      try {
+        const response: any = await axiosInstance.post(API_ROUTES.REGISTER, {
+          name,
+          email,
+          password,
+        });
+
+        if (response.error) {
+          toast.error(response.error);
+        } else if (response.status === 201) {
+          toast.success(response?.data?.message);
+          navigate("/signin");
+          console.log(response);
+        }
+      } catch (error: any) {
+        toast.error(error.response.data.message || "Something went wrong");
+        console.log("SignUpError", error);
+      }
+
       console.log("Form submitted successfully");
-      // Add your form submission logic here
     } else {
       console.log("Form has errors");
     }
@@ -177,10 +194,18 @@ const SignUp = () => {
               Sign Up
             </Button>
           </form>
+          <div className="mt-4">
+            <p className="font-poppins text-black text-base font-medium">
+              Already have an account?{" "}
+              <a href="/signin" className="text-[#0C2A92]">
+                Sign In
+              </a>
+            </p>
+          </div>
         </div>
       </div>
       <div className="w-[50%] border-[1px] rounded-tl-[50px] rounded-bl-[50px]">
-        <div className="">
+        <div className="w-full h-full">
           <img
             src={DummyImg}
             alt="melody verse"
