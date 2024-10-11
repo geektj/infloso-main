@@ -101,7 +101,7 @@ const SignUp = () => {
 
   return (
     <div className="flex w-full h-screen">
-      <div className="flex flex-col items-center justify-center w-[50%]">
+      <div className="flex flex-col items-center justify-center w-1/2">
         <div className="w-3/5">
           <h3 className="font-poppins text-black text-3xl font-semibold mb-1">
             SignUp for MelodyVerse
@@ -193,14 +193,14 @@ const SignUp = () => {
           <div className="mt-4">
             <p className="font-poppins text-black text-base font-medium">
               Already have an account?{" "}
-              <a href="/signin" className="text-[#0C2A92]">
+              <a href="/signin" className="text-blue">
                 Sign In
               </a>
             </p>
           </div>
         </div>
       </div>
-      <div className="w-[50%] border-[1px] rounded-tl-[50px] rounded-bl-[50px]">
+      <div className="w-1/2 rounded-tl-[50px] rounded-bl-[50px]">
         <div className="w-full h-full">
           <img
             src={DummyImg}

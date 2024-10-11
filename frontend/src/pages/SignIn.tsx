@@ -42,7 +42,7 @@ const SignIn = () => {
 
   return (
     <div className="flex w-full h-screen">
-      <div className="flex flex-col items-center justify-center w-[50%]">
+      <div className="flex flex-col items-center justify-center w-1/2">
         <div>
           <h3 className="font-poppins text-black text-3xl font-semibold mb-1">
             Login to MelodyVerse
@@ -71,7 +71,7 @@ const SignIn = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 required={true}
               />
-              <div className="font-poppins text-xs flex justify-end text-[#0C2A92]">
+              <div className="font-poppins text-xs flex justify-end text-blue">
                 <a href="/">forgot password</a>
               </div>
             </div>
@@ -90,14 +90,14 @@ const SignIn = () => {
           <div className="mt-4">
             <p className="font-poppins text-black text-base font-medium">
               Don't have an account?{" "}
-              <a href="/signup" className="text-[#0C2A92]">
+              <a href="/signup" className="text-blue">
                 Sign Up
               </a>
             </p>
           </div>
         </div>
       </div>
-      <div className="w-[50%] border-[1px] rounded-tl-[50px] rounded-bl-[50px]">
+      <div className="w-1/2 rounded-tl-[50px] rounded-bl-[50px]">
         <div className="w-full h-full">
           <img
             src={DummyImg}

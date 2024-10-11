@@ -39,7 +39,7 @@ export const Input: FC<InputProps> = ({
             value={value as string}
             onChange={onChange}
             required={required}
-            className="w-full border-[1px] border-[#D9D9D9] font-poppins text-xs font-medium h-[40px] rounded-[5px] p-2"
+            className="w-full border border-[#D9D9D9] font-poppins text-xs font-medium h-10 rounded p-2"
           />
           
           {type === "password" && (
