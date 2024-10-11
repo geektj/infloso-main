@@ -3,6 +3,7 @@ const express = require('express');
 const connectDB = require('./config/database');
 const authRoutes = require('./routes/authRoutes');
 const cors = require("cors");
+const bodyParser = require('body-parser')
 
 const app = express();
 
@@ -22,7 +23,7 @@ app.get('/', (req, res) => {
    res.json({ message: "Hello world from backend" });
 });
 
-app.use(express.json());
+app.use(bodyParser.json());
 
 app.use('/api/auth', authRoutes);
 
