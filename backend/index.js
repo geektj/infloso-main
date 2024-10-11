@@ -18,6 +18,9 @@ const corsOptions = {
 // Enable CORS with the specified options
 app.use(cors(corsOptions));
 
+app.get('/', (req, res) => {
+   res.json({ message: "Hello world from backend" });
+});
 
 app.use(express.json());
 
