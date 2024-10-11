@@ -89,18 +89,14 @@ const SignUp = () => {
         } else if (response.status === 201) {
           toast.success(response?.data?.message);
           navigate("/signin");
-          console.log(response);
         }
       } catch (error: any) {
         toast.error(error.response.data.message || "Something went wrong");
-        console.log("SignUpError", error);
       }
 
-      console.log("Form submitted successfully");
     } else {
       console.log("Form has errors");
     }
-    console.log("signup form submit");
   };
 
   return (

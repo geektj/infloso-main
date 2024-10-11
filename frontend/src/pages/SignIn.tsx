@@ -20,7 +20,6 @@ const SignIn = () => {
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("sigin form submit");
     try {
       const response: any = await axiosInstance.post(API_ROUTES.SIGNIN, {
         email,
@@ -29,7 +28,6 @@ const SignIn = () => {
 
       if (response?.status === 401) {
         toast.error(response?.data?.message);
-        console.log("login error", response.error);
       } else if (response?.status === 200 && response?.data?.token) {
         // it is validated till 24 hours, after certain time it token will remove
         setCookie(CookieName.AUTH_TOKEN, response?.data?.token, 1);
@@ -39,7 +37,6 @@ const SignIn = () => {
       }
     } catch (error: any) {
       toast.error(error.response.data.message || "Something went wrong");
-      console.log("SignUpError", error);
     }
   };
 
