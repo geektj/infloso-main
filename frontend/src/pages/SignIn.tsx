@@ -29,7 +29,6 @@ const SignIn = () => {
       if (response?.status === 401) {
         toast.error(response?.data?.message);
       } else if (response?.status === 200 && response?.data?.token) {
-        // it is validated till 24 hours, after certain time it token will remove
         setCookie(CookieName.AUTH_TOKEN, response?.data?.token, 1);
 
         toast.success(response?.data?.message);
