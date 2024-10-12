@@ -11,7 +11,7 @@ connectDB();
 
 // CORS configuration
 const corsOptions = {
-   origin: process.env.BASE_URL || "http://localhost:3000", 
+   origin: true, 
    credentials: true, 
    optionsSuccessStatus: 200, 
 };
